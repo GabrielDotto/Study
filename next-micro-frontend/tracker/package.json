@@ -1,0 +1,21 @@
+{
+  "name": "tracker",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "NEXT_PRIVATE_LOCAL_WEBPACK=true next dev -p 3002",
+    "build": "NEXT_PRIVATE_LOCAL_WEBPACK=true next build",
+    "start": "NEXT_PRIVATE_LOCAL_WEBPACK=true next start -p 3002"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.11.2",
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "react-redux": "^9.1.0"
+  },
+  "devDependencies": {
+    "@module-federation/nextjs-mf": "^8.8.56",
+    "webpack": "^5.105.3"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "next-micro-frontend",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:shipments\" \"npm run dev:tracker\" \"npm run dev:container\"",
+    "dev:container": "cd container && npm run dev",
+    "dev:shipments": "cd shipments && npm run dev",
+    "dev:tracker": "cd tracker && npm run dev",
+    "install:all": "cd container && npm install && cd ../shipments && npm install && cd ../tracker && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
