@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite"
   },
-  "author": "Vitor Fonseca",
+  "author": "Gabriel Dotto",
   "license": "ISC",
   "devDependencies": {
     "vite": "^5.0.10"
