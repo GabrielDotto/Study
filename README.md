@@ -17,3 +17,6 @@ Webpack Module Federation with plain JS. Three independent apps (Container, Ship
 
 ### `next-micro-frontend`
 Next.js 14 (Pages Router) micro-frontend using `@module-federation/nextjs-mf` and Redux Toolkit. Same three-app structure, production-closer setup.
+
+### `serverless-architecture-demo`
+Vite + Vanilla JS frontend backed by Firebase Firestore. Demonstrates the serverless pattern: no custom backend — the frontend reads data directly from a managed cloud database (Firestore Lite), with Firebase handling auth, infra, and scaling.
