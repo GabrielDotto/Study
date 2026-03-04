@@ -20,3 +20,9 @@ Next.js 14 (Pages Router) micro-frontend using `@module-federation/nextjs-mf` an
 
 ### `serverless-architecture-demo`
 Vite + Vanilla JS frontend backed by Firebase Firestore. Demonstrates the serverless pattern: no custom backend — the frontend reads data directly from a managed cloud database (Firestore Lite), with Firebase handling auth, infra, and scaling.
+
+### `demo-vanillajs-pwa`
+Vanilla JS Progressive Web App demo. Covers service workers, caching strategies, and the web app manifest to make a site installable and work offline.
+
+### `demo-server-side-rendering`
+Express + EJS demo showing server-side rendering. The server fetches data (PokéAPI) and renders the full HTML page before sending it to the client — no client-side JS required to display content.
