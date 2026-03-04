@@ -1,0 +1,164 @@
+{
+  /**
+   * tsconfig.json — TypeScript Compiler Configuration
+   *
+   * This file tells the TypeScript compiler (tsc) how to handle your code.
+   * Next.js reads this automatically — you don't import or reference it manually.
+   *
+   * Next.js uses SWC (not tsc) to actually transpile your TypeScript files at
+   * build/dev time. SWC is much faster but strips types without checking them.
+   * TypeScript type-checking still happens via your editor (e.g. VSCode) and
+   * `next build`, which runs `tsc --noEmit` before bundling.
+   */
+  "compilerOptions": {
+    /**
+     * target: "es5"
+     * Transpiles modern JS syntax (arrow functions, classes, etc.) down to ES5
+     * for maximum browser compatibility. Next.js handles this with SWC, so the
+     * value here mainly affects type declarations, not the actual output.
+     * In modern Next.js projects targeting evergreen browsers you'd use "es2017"+.
+     */
+    "target": "es5",
+
+    /**
+     * lib: the type definitions TypeScript knows about.
+     *   "dom"         → browser APIs: window, document, fetch, etc.
+     *   "dom.iterable"→ makes DOM collections (NodeList, HTMLCollection) iterable
+     *   "esnext"      → latest JS built-ins: Promise, Map, Array methods, etc.
+     * Without "dom", TypeScript wouldn't know what `fetch` or `document` are.
+     */
+    "lib": ["dom", "dom.iterable", "esnext"],
+
+    /**
+     * allowJs: true
+     * Lets TypeScript process .js files alongside .ts/.tsx files.
+     * Useful during migration — you don't have to convert everything at once.
+     * Next.js sets this to allow mixing JS and TS in the same project.
+     */
+    "allowJs": true,
+
+    /**
+     * skipLibCheck: true
+     * Skips type-checking of .d.ts files inside node_modules.
+     * This is a pragmatic choice — some packages ship broken type declarations,
+     * and you don't want their bugs to block your build. Almost all Next.js
+     * projects use this.
+     */
+    "skipLibCheck": true,
+
+    /**
+     * strict: true
+     * Enables a bundle of strict type-checking rules:
+     *   - strictNullChecks: null and undefined are not assignable to other types
+     *   - noImplicitAny: variables must have explicit types if they can't be inferred
+     *   - strictFunctionTypes: stricter checking of function parameter types
+     *   - and more...
+     * This catches many real bugs at compile time. Recommended for all new projects.
+     */
+    "strict": true,
+
+    /**
+     * noEmit: true
+     * Tells tsc NOT to output any compiled .js files.
+     * Next.js (via SWC) handles the actual compilation — TypeScript is only used
+     * for type checking here, not for generating output files.
+     */
+    "noEmit": true,
+
+    /**
+     * esModuleInterop: true
+     * Allows default imports from CommonJS modules (e.g. `import path from "path"`
+     * instead of `import * as path from "path"`).
+     * Most Node.js packages are CommonJS, so this makes imports cleaner.
+     */
+    "esModuleInterop": true,
+
+    /**
+     * module: "esnext"
+     * Tells TypeScript to treat your code as using ES Modules (import/export).
+     * Next.js handles module bundling, so "esnext" here just means TS should
+     * understand ESM syntax.
+     */
+    "module": "esnext",
+
+    /**
+     * moduleResolution: "bundler"
+     * Tells TypeScript to resolve modules the way a bundler (like webpack/SWC) does,
+     * rather than like Node.js. This supports features like extensionless imports
+     * and package.json `exports` field properly.
+     * Use "node" if you're writing plain Node.js code without a bundler.
+     */
+    "moduleResolution": "bundler",
+
+    /**
+     * resolveJsonModule: true
+     * Lets you import .json files directly:
+     *   import data from "./data.json"
+     * TypeScript will infer the type from the JSON structure.
+     */
+    "resolveJsonModule": true,
+
+    /**
+     * isolatedModules: true
+     * Ensures each file can be transpiled independently (no cross-file type info).
+     * Required by SWC and Babel — they process one file at a time, so they can't
+     * rely on information from other files during transpilation.
+     */
+    "isolatedModules": true,
+
+    /**
+     * jsx: "preserve"
+     * Tells TypeScript to leave JSX syntax as-is in the output.
+     * Next.js (via SWC) handles JSX transformation — converting <div> to
+     * React.createElement() calls (or the new JSX transform). "preserve" means
+     * TS stays out of the way and lets SWC do its job.
+     */
+    "jsx": "preserve",
+
+    /**
+     * incremental: true
+     * Caches compilation results to speed up subsequent builds.
+     * TypeScript stores a .tsbuildinfo file and only re-checks changed files.
+     */
+    "incremental": true,
+
+    /**
+     * plugins — Next.js TypeScript plugin
+     * Adds Next.js-specific type checking inside your editor (VSCode):
+     *   - warns if you use Server Component features inside a Client Component
+     *   - validates metadata exports
+     *   - validates route segment config exports
+     * This only runs in the editor, not during `tsc` or `next build`.
+     */
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+
+    /**
+     * paths — import aliases
+     * Lets you use "@/components/Button" instead of "../../components/Button".
+     * "@/*" maps to the project root, so "@/app/page" → "./app/page".
+     * You'd configure the same alias in next.config.js if using webpack.
+     * With Next.js + SWC, the tsconfig paths are picked up automatically.
+     */
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+
+  /**
+   * include — which files TypeScript should process
+   * - "next-env.d.ts"          → auto-generated by Next.js, adds Next.js types
+   * - "**\/*.ts" / "**\/*.tsx"  → all TypeScript files in the project
+   * - ".next/types/**\/*.ts"    → generated types for App Router features
+   */
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+
+  /**
+   * exclude — which files TypeScript should ignore
+   * node_modules is always excluded to avoid type-checking library source code.
+   */
+  "exclude": ["node_modules"]
+}
