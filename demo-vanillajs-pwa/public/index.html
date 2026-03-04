@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>VanillaPWA</title>
+    <link rel="manifest" href="./manifest.json" />
+    <script type="module">
+      let registrations = [];
+
+      window.registerServiceWorker = () => {
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker
+            .register("./service-worker.js")
+            .then((registration) => {
+              registrations.push(registration);
+
+              document.getElementById("registration").innerHTML =
+                registration.scope;
+              document.getElementById("registerBtn").style.display = "none";
+              document.getElementById("unregisterBtn").style.display = "block";
+            })
+            .catch((err) => {
+              console.error("Service Worker registration failed:", err);
+            });
+        } else {
+          console.warn("Service Workers are not supported in this browser.");
+        }
+      };
+
+      window.unregisterServiceWorker = () => {
+        if ("serviceWorker" in navigator) {
+          registrations.forEach((registration) => {
+            registration.unregister();
+          });
+
+          document.getElementById("registration").innerHTML =
+            "No Service Worker registered";
+          document.getElementById("registerBtn").style.display = "block";
+          document.getElementById("unregisterBtn").style.display = "none";
+        }
+      };
+
+      window.registerServiceWorker();
+    </script>
+  </head>
+  <body style="display: flex; flex-direction: column">
+    <h1>This is a demo to show VanillaPWA</h1>
+
+    <h2>Registrations</h2>
+    <p id="registration"></p>
+    <br />
+
+    <button id="unregisterBtn" onclick="unregisterServiceWorker()">
+      Unregister Service Worker
+    </button>
+    <br />
+    <button id="registerBtn" onclick="registerServiceWorker()">
+      Register Service Worker
+    </button>
+    <br />
+    <br />
+
+    <img src="./img.jpg" />
+  </body>
+</html>
